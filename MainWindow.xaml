@@ -1,0 +1,59 @@
+﻿<Window x:Class="SystemReinstallCopier.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemReinstallCopier"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        x:Name="window"
+        DataContext="{Binding ElementName=window, Path=ViewModel}">
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Сохранить"/>
+                <MenuItem Header="Сохранить как"/>
+                <MenuItem Header="Загрузить"/>
+            </MenuItem>
+        </Menu>
+        
+        <StackPanel DockPanel.Dock="Top" Margin="10">
+            <TextBlock Text="Папка для сохранения файлов"/>
+            <TextBox x:Name="saveFolderText" Text="{Binding SaveFolder}" TextWrapping="Wrap" Margin="0,5,0,5"/>
+            <Button Content="Выбрать папку" HorizontalAlignment="Left" Click="SelectSaveFolder"/>
+        </StackPanel>
+
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Content="Создать копию" Grid.Column="0" Margin="5"/>
+            <Button Content="Восстановить копию" Grid.Column="1" Margin="5"/>
+        </Grid>
+
+        <StackPanel Margin="10" CanHorizontallyScroll="False">
+            <Button Content="Добавить папку в список сохраняемых"/>
+            <ListBox x:Name="listView" ItemsSource="{Binding Path=Configuration.SavedDirectories}" Margin="0,5,0,5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Content="Abcd"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Path=FullName}" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </DockPanel>
+</Window>
